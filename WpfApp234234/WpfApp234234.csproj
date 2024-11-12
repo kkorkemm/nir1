@@ -58,6 +58,8 @@
     <Compile Include="Entities\ClassAttributes.cs" />
     <Compile Include="Entities\ClassBox.cs" />
     <Compile Include="Entities\ClassMethods.cs" />
+    <Compile Include="Entities\Connection.cs" />
+    <Compile Include="Entities\ConnectionLine.cs" />
     <Compile Include="Entities\NewClass.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Windows\AddClassWindow.xaml.cs">

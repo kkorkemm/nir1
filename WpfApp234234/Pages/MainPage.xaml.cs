@@ -28,18 +28,22 @@ namespace WpfApp234234.Pages
 
         private void BtnAddClass_Click(object sender, RoutedEventArgs e)
         {
+            int count = User.UserClasses.Count;
             Windows.AddClassWindow addClassWindow = new Windows.AddClassWindow();
             addClassWindow.ShowDialog();
 
-            var newClass = new ClassBox(CNV);
-            User.UserClassBoxes.Add(newClass);
+            if (count < User.UserClasses.Count)
+            {
+                var newClass = new ClassBox(CNV);
+            }
 
-            ListClasses.Items.Add(newClass);
+            ListClasses.ItemsSource = User.UserClasses.ToList();
         }
 
         private void BtnAddLink_Click(object sender, RoutedEventArgs e)
         {
-            if (User.UserClassBoxes.Count < 2)
+            int count = User.UserConnections.Count;
+            if (User.UserClasses.Count < 2)
             {
                 MessageBox.Show("Количество классов должно быть >= 2", "Внимание!", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
@@ -47,6 +51,13 @@ namespace WpfApp234234.Pages
 
             Windows.AddLinkWindow addLinkWindow = new Windows.AddLinkWindow(); 
             addLinkWindow.ShowDialog();
+
+            if (count < User.UserConnections.Count)
+            {
+                var newLine = new ConnectionLine(CNV);
+            }
+
+            ListConnections.ItemsSource = User.UserConnections.ToList();
         }
     }
 }
