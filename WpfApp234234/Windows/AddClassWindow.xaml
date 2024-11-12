@@ -1,0 +1,95 @@
+﻿<Window x:Class="WpfApp234234.Windows.AddClassWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp234234.Windows"
+        mc:Ignorable="d"
+        Title="Добавить новый класс" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid Margin="20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Название класса: "
+                       FontSize="15"
+                       Margin="5"/>
+
+            <TextBox x:Name="TextClassName"
+                     Grid.Column="1"
+                     VerticalAlignment="Center"
+                     Margin="5"/>
+
+        </Grid>
+
+        <Grid Grid.Row="1"
+              Margin="20 10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Атрибуты: "
+                       FontSize="15"
+                       Margin="5"/>
+
+            <DataGrid Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Название" Width="*"/>
+                    <DataGridTextColumn Header="Тип данных" Width="*"/>
+                    <DataGridTextColumn Header="Тип доступа" Width="*"/>
+                    <DataGridTextColumn Header="Свойства" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            
+        </Grid>
+
+        <Grid Grid.Row="2"
+              Margin="20 10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Методы: "
+               FontSize="15"
+               Margin="5"/>
+
+            <DataGrid Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="False"  >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Название" Width="*"/>
+                    <DataGridTextColumn Header="Тип данных" Width="*"/>
+                    <DataGridTextColumn Header="Тип доступа" Width="*"/>
+                    <DataGridTextColumn Header="Свойства" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+        </Grid>
+
+        <StackPanel Grid.Row="3"
+                    Orientation="Horizontal">
+            <Button x:Name="BtnSave"
+                    Click="BtnSave_Click"
+                    Content="Добавить класс"
+                    Padding="10"
+                    Margin="20 10"
+                    Width="150"/>
+            <Button x:Name="BtnCancel"
+                    Click="BtnCancel_Click"
+                    Content="Отмена"
+                    Padding="10"
+                    Margin="20 10"
+                    Width="150"/>
+        </StackPanel>
+
+    </Grid>
+</Window>

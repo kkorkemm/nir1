@@ -1,0 +1,65 @@
+﻿<Page x:Class="WpfApp234234.Pages.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfApp234234.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="MainPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Menu>
+            <MenuItem Header="Файл"/>
+        </Menu>
+
+        <Grid Margin="10"
+              Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <StackPanel>
+
+                    <StackPanel.Resources>
+                        <Style TargetType="Button">
+                            <Setter Property="Margin" Value="0 10"/>
+                            <Setter Property="Padding" Value="0 10"/>
+                        </Style>
+                    </StackPanel.Resources>
+
+                    <Button Content="Добавить класс" x:Name="BtnAddClass" Click="BtnAddClass_Click"/>
+                    <Button Content="Добавить связь" x:Name="BtnAddLink" Click="BtnAddLink_Click"/>
+                </StackPanel>
+
+                <ListView Grid.Row="1"
+                          Margin="0 10"
+                          x:Name="ListClasses">
+                    
+                </ListView>
+                
+            </Grid>
+
+            <Canvas Grid.Column="1"
+                    x:Name="CNV"
+                    Background="LightGray"
+                    Margin="10">
+
+            </Canvas>
+            
+        </Grid>
+        
+    </Grid>
+</Page>
