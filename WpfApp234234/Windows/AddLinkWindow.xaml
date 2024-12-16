@@ -73,13 +73,15 @@
                   Grid.Column="1"
                   VerticalAlignment="Center"
                   DisplayMemberPath="Name"
-                  SelectionChanged="ComboLinkTypes_SelectionChanged"/>
+                  SelectionChanged="ComboLinkTypes_SelectionChanged"
+                  SelectedItem="{Binding Type}"/>
 
         <ComboBox x:Name="ComboClass1"
                   Grid.Row="1"
                   Grid.Column="1"
                   VerticalAlignment="Center"
                   DisplayMemberPath="Name"
+                  SelectedItem="{Binding Class1}"
                   SelectionChanged="ComboLinkTypes_SelectionChanged"/>
 
         <ComboBox x:Name="ComboClass2"
@@ -87,11 +89,13 @@
                   Grid.Column="1"
                   VerticalAlignment="Center"
                   DisplayMemberPath="Name"
+                  SelectedItem="{Binding Class2}"
                   SelectionChanged="ComboLinkTypes_SelectionChanged"/>
 
         <TextBox x:Name="TextLinkName"
                  Grid.Column="1"
                  Grid.Row="3"
+                 Text="{Binding Name}"
                  VerticalAlignment="Center"/>
 
         <StackPanel Grid.Row="4"

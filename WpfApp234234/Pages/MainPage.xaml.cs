@@ -29,12 +29,13 @@ namespace WpfApp234234.Pages
         private void BtnAddClass_Click(object sender, RoutedEventArgs e)
         {
             int count = User.UserClasses.Count;
-            Windows.AddClassWindow addClassWindow = new Windows.AddClassWindow();
+            Windows.AddClassWindow addClassWindow = new Windows.AddClassWindow(null);
             addClassWindow.ShowDialog();
 
             if (count < User.UserClasses.Count)
             {
                 var newClass = new ClassBox(CNV);
+                User.UserClassBoxes.Add(newClass);
             }
 
             ListClasses.ItemsSource = User.UserClasses.ToList();
@@ -49,15 +50,33 @@ namespace WpfApp234234.Pages
                 return;
             }
 
-            Windows.AddLinkWindow addLinkWindow = new Windows.AddLinkWindow(); 
+            Windows.AddLinkWindow addLinkWindow = new Windows.AddLinkWindow(null); 
             addLinkWindow.ShowDialog();
 
             if (count < User.UserConnections.Count)
             {
                 var newLine = new ConnectionLine(CNV);
+               
             }
 
             ListConnections.ItemsSource = User.UserConnections.ToList();
+        }
+
+        private void ListClasses_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var userClass = ListClasses.SelectedItem as NewClass;
+            var box = User.UserClassBoxes.Where(p => p.ClassInfo.Name == userClass.Name).FirstOrDefault();
+
+            Windows.AddClassWindow editClassWindow = new Windows.AddClassWindow(userClass);
+            editClassWindow.ShowDialog();
+
+        }
+
+        private void ListConnections_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var connection = ListConnections.SelectedItem as Connection;
+            Windows.AddLinkWindow editConnectionWindow = new Windows.AddLinkWindow(connection);
+            editConnectionWindow.ShowDialog();
         }
     }
 }

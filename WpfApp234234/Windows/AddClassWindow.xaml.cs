@@ -20,16 +20,29 @@ namespace WpfApp234234.Windows
     /// </summary>
     public partial class AddClassWindow : Window
     {
-        public AddClassWindow()
+        private NewClass userClass = new NewClass();
+        private bool isNew = true;
+
+        public AddClassWindow(NewClass userClass)
         {
             InitializeComponent();
+
+            if (userClass != null)
+            {
+                this.userClass = userClass;
+                isNew = false;
+            }
+
+            DataContext = this.userClass;
         }
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
-        {
-            NewClass newClass = new NewClass();
-            newClass.Name = TextClassName.Text;
-            User.UserClasses.Add(newClass);
+        {      
+            if (isNew)
+            {
+                User.UserClasses.Add(userClass);
+            }
+
             Close();
         }
 

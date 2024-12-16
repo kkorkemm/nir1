@@ -53,14 +53,16 @@
 
                     <ListView Margin="0 5"
                               x:Name="ListClasses"
-                              DisplayMemberPath="Name">
+                              DisplayMemberPath="Name"
+                              SelectionChanged="ListClasses_SelectionChanged">
                         
                     </ListView>
                     
                     <ListView Grid.Row="1"
                               Margin="0 5"
                               x:Name="ListConnections"
-                              DisplayMemberPath="Name">
+                              DisplayMemberPath="Name"
+                              SelectionChanged="ListConnections_SelectionChanged">
 
                     </ListView>
                 </Grid>

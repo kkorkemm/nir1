@@ -25,13 +25,19 @@ namespace WpfApp234234.Windows
         public List<NewClass> userclasses = User.UserClasses;
         public List<ConnectionType> userConnections = User.connectionTypes;
 
-        public AddLinkWindow()
+        public AddLinkWindow(Connection connection)
         {
             InitializeComponent();
 
             ComboClass1.ItemsSource = userclasses;
             ComboClass2.ItemsSource = userclasses;
             ComboLinkTypes.ItemsSource = userConnections;
+
+            if (connection != null)
+            {
+                DataContext = connection;
+            }
+
         }
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)

@@ -27,7 +27,8 @@
             <TextBox x:Name="TextClassName"
                      Grid.Column="1"
                      VerticalAlignment="Center"
-                     Margin="5"/>
+                     Margin="5"
+                     Text="{Binding Name}"/>
 
         </Grid>
 
