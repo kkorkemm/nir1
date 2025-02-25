@@ -73,7 +73,11 @@
                     x:Name="CNV"
                     Background="LightGray"
                     Margin="10">
-
+                <Canvas.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Вставить" Command="Paste"/>
+                    </ContextMenu>
+                </Canvas.ContextMenu>
             </Canvas>
             
         </Grid>

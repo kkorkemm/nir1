@@ -23,21 +23,46 @@ namespace WpfApp234234.Windows
         private NewClass userClass = new NewClass();
         private bool isNew = true;
 
-        public AddClassWindow(NewClass userClass)
+        public AddClassWindow(NewClass newClass)
         {
             InitializeComponent();
 
-            if (userClass != null)
+            userClass.Attributes = new List<ClassAttributes>();
+            userClass.Methods = new List<ClassMethods>();
+
+            if (newClass != null)
             {
-                this.userClass = userClass;
+                userClass = newClass;
                 isNew = false;
             }
 
-            DataContext = this.userClass;
+            DataContext = userClass;
+            GridClassAttributes.ItemsSource = userClass.Attributes;
+            GridClassMethods.ItemsSource = userClass.Methods;
         }
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
-        {      
+        {
+            var attributes = GridClassAttributes.ItemsSource as List<ClassAttributes>;
+            var attributesCopy = attributes.Take(attributes.Count() - 2).ToList();
+            if (attributesCopy != null)
+            {
+                foreach (var attribute in attributesCopy)
+                {
+                    userClass.Attributes.Add(attribute);
+                }
+            }
+
+            var methods = GridClassMethods.ItemsSource as List<ClassMethods>;
+            var methodsCopy = methods.Take(methods.Count() - 2).ToList();
+            if (methodsCopy != null)
+            {
+                foreach(var method in methodsCopy)
+                {
+                    userClass.Methods.Add(method);
+                }
+            }
+
             if (isNew)
             {
                 User.UserClasses.Add(userClass);

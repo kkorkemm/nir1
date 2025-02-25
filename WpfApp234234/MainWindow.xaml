@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp234234"
         mc:Ignorable="d"
-        Title="Редактор диаграмм классов" Height="650" Width="1000" WindowStartupLocation="CenterScreen"
+        Title="Редактор диаграмм классов" Height="750" Width="1000" WindowStartupLocation="CenterScreen"
         >
     <Grid>
         <Frame x:Name="MainFrame"

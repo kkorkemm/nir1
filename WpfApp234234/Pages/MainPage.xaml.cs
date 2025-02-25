@@ -41,6 +41,25 @@ namespace WpfApp234234.Pages
             ListClasses.ItemsSource = User.UserClasses.ToList();
         }
 
+        private ClassBox copiedClass;
+
+        public void CopyClass(ClassBox classBox)
+        {
+            copiedClass = classBox;
+            ListClasses.ItemsSource = User.UserClasses.ToList();
+        }
+
+        public void PasteClass(NewClass myClass)
+        {
+            if (copiedClass == null) return;
+
+            // Создаем новый класс на основе скопированного
+            var newClass = new ClassBox(CNV, copiedClass);
+            User.UserClassBoxes.Add(newClass);
+            User.UserClasses.Add(myClass);
+            ListClasses.ItemsSource = User.UserClasses.ToList();
+        }
+
         private void BtnAddLink_Click(object sender, RoutedEventArgs e)
         {
             int count = User.UserConnections.Count;

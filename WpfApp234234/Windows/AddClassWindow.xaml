@@ -4,8 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp234234.Windows"
+        xmlns:l="clr-namespace:WpfApp234234.Entities"
         mc:Ignorable="d"
-        Title="Добавить новый класс" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+        Title="Добавить новый класс" Height="650" Width="800" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -43,12 +44,38 @@
                        FontSize="15"
                        Margin="5"/>
 
-            <DataGrid Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="False">
+            <DataGrid Grid.Row="1" x:Name="GridClassAttributes"
+                      AutoGenerateColumns="False"
+                      CanUserAddRows="True"
+                      CanUserDeleteRows="True">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Название" Width="*"/>
-                    <DataGridTextColumn Header="Тип данных" Width="*"/>
-                    <DataGridTextColumn Header="Тип доступа" Width="*"/>
-                    <DataGridTextColumn Header="Свойства" Width="*"/>
+                    <DataGridTextColumn Header="Название" Width="*" Binding="{Binding Name}"/>
+
+                    <DataGridComboBoxColumn Header="Тип данных" SelectedItemBinding="{Binding Type}" Width="*">
+                        <DataGridComboBoxColumn.ItemsSource>
+                            <x:Array Type="{x:Type l:AttributesTypes}">
+                                <x:Static Member="l:AttributesTypes.String" />
+                                <x:Static Member="l:AttributesTypes.Integer" />
+                                <x:Static Member="l:AttributesTypes.Boolean" />
+                                <x:Static Member="l:AttributesTypes.Real" />
+                                <x:Static Member="l:AttributesTypes.UnlimitedNatural" />
+                            </x:Array>
+                        </DataGridComboBoxColumn.ItemsSource>
+                    </DataGridComboBoxColumn>
+
+
+                    <DataGridComboBoxColumn Header="Модификатор доступа" SelectedItemBinding="{Binding Modif}" Width="*">
+                        <DataGridComboBoxColumn.ItemsSource>
+                            <x:Array Type="{x:Type l:ModifTypes}">
+                                <x:Static Member="l:ModifTypes.Public" />
+                                <x:Static Member="l:ModifTypes.Protected" />
+                                <x:Static Member="l:ModifTypes.Private" />
+                            </x:Array>
+                        </DataGridComboBoxColumn.ItemsSource>
+                    </DataGridComboBoxColumn>
+
+                    <DataGridTextColumn Header="Кратность" Width="*" Binding="{Binding Krat}"/>
+                    <DataGridTextColumn Header="Ограничения" Width="*" Binding="{Binding Ogran}"/>
                 </DataGrid.Columns>
             </DataGrid>
             
@@ -65,12 +92,37 @@
                FontSize="15"
                Margin="5"/>
 
-            <DataGrid Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="False"  >
+            <DataGrid Grid.Row="1" x:Name="GridClassMethods"
+                      AutoGenerateColumns="False"
+                      CanUserAddRows="True"
+                      CanUserDeleteRows="True">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Название" Width="*"/>
-                    <DataGridTextColumn Header="Тип данных" Width="*"/>
-                    <DataGridTextColumn Header="Тип доступа" Width="*"/>
-                    <DataGridTextColumn Header="Свойства" Width="*"/>
+                    <DataGridTextColumn Header="Название" Width="*" Binding="{Binding Name}"/>
+
+                    <DataGridComboBoxColumn Header="Тип возращаемого значения" SelectedItemBinding="{Binding Type}" Width="*">
+                        <DataGridComboBoxColumn.ItemsSource>
+                            <x:Array Type="{x:Type l:AttributesTypes}">
+                                <x:Static Member="l:AttributesTypes.Void"/>
+                                <x:Static Member="l:AttributesTypes.String" />
+                                <x:Static Member="l:AttributesTypes.Integer" />
+                                <x:Static Member="l:AttributesTypes.Boolean" />
+                                <x:Static Member="l:AttributesTypes.Real" />
+                                <x:Static Member="l:AttributesTypes.UnlimitedNatural" />
+                            </x:Array>
+                        </DataGridComboBoxColumn.ItemsSource>
+                    </DataGridComboBoxColumn>
+
+                    <DataGridComboBoxColumn Header="Модификатор доступа" SelectedItemBinding="{Binding Modif}" Width="*">
+                        <DataGridComboBoxColumn.ItemsSource>
+                            <x:Array Type="{x:Type l:ModifTypes}">
+                                <x:Static Member="l:ModifTypes.Public" />
+                                <x:Static Member="l:ModifTypes.Protected" />
+                                <x:Static Member="l:ModifTypes.Private" />
+                            </x:Array>
+                        </DataGridComboBoxColumn.ItemsSource>
+                    </DataGridComboBoxColumn>
+
+                    <DataGridTextColumn Header="Ограничения" Width="*" Binding="{Binding Ogran}"/>
                 </DataGrid.Columns>
             </DataGrid>
 

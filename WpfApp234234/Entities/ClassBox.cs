@@ -8,6 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using WpfApp234234.Pages;
 
 namespace WpfApp234234.Entities
 {
@@ -25,12 +26,26 @@ namespace WpfApp234234.Entities
         private List<UIElement> elements = new List<UIElement>();
         private bool isDragging = false;
         private Point dragStartPoint;
+        private MainPage mainWindow;
 
         public ClassBox(Canvas canvas)
         {
             this.canvas = canvas;
+            mainWindow = ((canvas.Parent as Grid).Parent as Grid).Parent as MainPage;
             X = new Random().Next(50, (int)canvas.ActualWidth - Width);
             Y = new Random().Next(50, (int)canvas.ActualHeight - Height);
+
+            Draw();
+        }
+
+        public ClassBox(Canvas canvas, ClassBox copiedClass)
+        {
+            this.canvas = canvas;
+            mainWindow = ((canvas.Parent as Grid).Parent as Grid).Parent as MainPage;
+            X = copiedClass.X + 20; // Смещаем новый класс для видимости
+            Y = copiedClass.Y + 20;
+            Width = copiedClass.Width;
+            Height = copiedClass.Height;
 
             Draw();
         }
@@ -52,6 +67,22 @@ namespace WpfApp234234.Entities
             rect.MouseLeftButtonDown += Rect_MouseLeftButtonDown;
             rect.MouseMove += Rect_MouseMove;
             rect.MouseLeftButtonUp += Rect_MouseLeftButtonUp;
+
+            // Добавляем контекстное меню
+            var contextMenu = new ContextMenu();
+            var copyMenuItem = new MenuItem { Header = "Копировать" };
+            copyMenuItem.Click += (s, e) => mainWindow.CopyClass(this);
+            var pasteMenuItem = new MenuItem { Header = "Вставить" };
+            pasteMenuItem.Click += (s, e) => mainWindow.PasteClass(ClassInfo);
+            contextMenu.Items.Add(copyMenuItem);
+            contextMenu.Items.Add(pasteMenuItem);
+
+            rect.ContextMenu = contextMenu;
+
+            rect.MouseLeftButtonDown += Rect_MouseLeftButtonDown;
+            rect.MouseMove += Rect_MouseMove;
+            rect.MouseLeftButtonUp += Rect_MouseLeftButtonUp;
+
 
             var className = new TextBlock
             {
@@ -83,8 +114,40 @@ namespace WpfApp234234.Entities
             //canvas.Children.Add(line);
             //elements.Add(line);
 
-            var attributes = new List<string> { "attribute1", "attribute2", "attribute3" };
-            var methods = new List<string> { "method1()", "method2()", "method3()" };
+
+            var attributes = new List<string>();
+            if (ClassInfo.Attributes != null)
+            {
+                foreach (var attr in ClassInfo.Attributes)
+                {
+                    string name = "";
+                    if (attr.Modif == ModifTypes.Public) name += "+";
+                    else if (attr.Modif == ModifTypes.Private) name += "-";
+                    else name += "#";
+
+                    name += " " + attr.Name + ": ";
+                    name += attr.Type.ToString();
+
+                    attributes.Add(name);
+                }
+            }
+
+            var methods = new List<string>();
+            if (ClassInfo.Methods != null)
+            {
+                foreach(var method in ClassInfo.Methods)
+                {
+                    string name = "";
+                    if (method.Modif == ModifTypes.Public) name += "+";
+                    else if (method.Modif == ModifTypes.Private) name += "-";
+                    else name += "#";
+
+                    name += " " + method.Name + "()";
+                    if (method.Type != AttributesTypes.Void) name += ": " + method.Type.ToString();
+
+                    methods.Add(name);
+                }
+            }
 
             for (int i = 0; i < attributes.Count; i++)
             {
@@ -94,7 +157,7 @@ namespace WpfApp234234.Entities
                     Foreground = Brushes.Black
                 };
                 Canvas.SetLeft(textBlock, X + 10);
-                Canvas.SetTop(textBlock, Y + 10 + i * 20);
+                Canvas.SetTop(textBlock, Y + 20 + i * 20);
                 canvas.Children.Add(textBlock);
                 elements.Add(textBlock);
             }
